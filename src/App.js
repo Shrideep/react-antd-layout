@@ -5,8 +5,6 @@ import Title from 'antd/lib/typography/Title';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { Cricketer, ODICareer, Batting, Bowling, TestCareer } from './Cricketer';
 import CareerDetails from './CareerDetails';
-import { configConsumerProps } from 'antd/lib/config-provider';
-import { functionTypeAnnotation } from '@babel/types';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -59,7 +57,7 @@ function App() {
                 <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
               </Breadcrumb>
               <div style={{ background: '#fff', padding: 24, minHeight: 580 }}>
-                <Cricketer name='Virat Kholi' team='IND' avatarSrc='./vk.jpg'>
+                <Cricketer name='Virat Kohli' team='IND' avatarSrc='./vk.jpg'>
                   <ODICareer matches='239' >
                     <Batting runs='11,520' score='183' />
                     <br></br>
