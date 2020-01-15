@@ -1,36 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer } from 'antd';
+import { Drawer, Skeleton } from 'antd';
+import useFetchData from './service';
 
 const CareerDetails = ({ player, visible, onClose }) => {
 
     const [details, setDetails] = useState({});
-    const { name, team, age, born, batting, bowling } = details;
-
-    useEffect(() => {
-        async function fetchData() {
-            await fetch('./' + player.replace(' ', '_') + '.json')
-                .then(response => {
-                    response.json()
-                        .then(data => setDetails(data))
-                })
-        }
-        fetchData();
-
-        return () => {
-            console.log('return of player useEffect');
-        }
-    }, [player]);
-
-    useEffect(() => {
-
-        console.log('mount')
-
-        return () => {
-            console.log('unmount');
-        }
-
-    }, []);
-
+    const [isLoading, output] = useFetchData('./' + player.replace(' ', '_') + '.json');
+    const { name, team, age, born, batting, bowling } = output;
 
     return (
         <Drawer
@@ -40,13 +16,15 @@ const CareerDetails = ({ player, visible, onClose }) => {
             width={640}
             onClose={onClose}
         >
-            <div style={{ padding: 10 }}><p>Team - {team}</p>
-                <p>age - {age}</p>
-                <p>born - {born}</p>
-                <p>batting - {batting}</p>
-                <p>bowling - {bowling}</p>
+            <Skeleton active loading={isLoading} paragraph={{ rows: 4 }} >
+                <div style={{ padding: 10 }}><p>Team - {team}</p>
+                    <p>age - {age}</p>
+                    <p>born - {born}</p>
+                    <p>batting - {batting}</p>
+                    <p>bowling - {bowling}</p>
 
-            </div>
+                </div>
+            </Skeleton>
         </Drawer>
     )
 }
